@@ -1,14 +1,11 @@
-import { useData } from "./useData";
-import type { Game } from "../entities/Game";
+import { useQuery } from "@tanstack/react-query";
+import gameService from "../services/game-service";
 import type { GameQuery } from "../entities/GameQuery";
 
 export default function useGames(gameQuery: GameQuery) {
-  const { data: games, error, isLoading } = useData<Game>(
-    "/games",
-    { params: { genres: gameQuery.genre?.id, parent_platforms: gameQuery.platform?.id, ordering: gameQuery.sortOrder, search: gameQuery.searchText || undefined } },
-    [gameQuery]
-  );
-  return { games, error, isLoading };
+  const { data, error, isLoading } = useQuery({
+    queryKey: ["games", gameQuery],
+    queryFn: ({ signal }) => gameService.getGames(gameQuery, signal),
+  });
+  return { games: data?.results ?? [], error: error ? (error as Error).message : null, isLoading };
 }
-
-export type { Game, FetchGamesResponse } from "../entities/Game";
