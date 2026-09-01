@@ -1,7 +1,6 @@
-import apiClient from "./api-client";
+import { ApiClient } from "./api-client";
 import type { Genre } from "../entities/Genre";
-import type { FetchResponse } from "../entities/Game";
 
-const getGenres = () => apiClient.get<FetchResponse<Genre>>("/genres");
-
+const client = new ApiClient<Genre>("/genres");
+const getGenres = () => client.getAll();
 export default { getGenres };

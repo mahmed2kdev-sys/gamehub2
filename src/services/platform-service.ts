@@ -1,7 +1,6 @@
-import apiClient from "./api-client";
+import { ApiClient } from "./api-client";
 import type { Platform } from "../entities/Platform";
-import type { FetchResponse } from "../entities/Game";
 
-const getPlatforms = () => apiClient.get<FetchResponse<Platform>>("/platforms/lists/parents");
-
+const client = new ApiClient<Platform>("/platforms/lists/parents");
+const getPlatforms = () => client.getAll();
 export default { getPlatforms };

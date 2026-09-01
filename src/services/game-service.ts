@@ -1,9 +1,11 @@
-import apiClient from "./api-client";
-import type { FetchResponse, Game } from "../entities/Game";
+import { ApiClient } from "./api-client";
+import type { Game } from "../entities/Game";
 import type { GameQuery } from "../entities/GameQuery";
 
+const client = new ApiClient<Game>("/games");
+
 const getGames = (gameQuery: GameQuery, signal?: AbortSignal) =>
-  apiClient.get<FetchResponse<Game>>("/games", {
+  client.getAll({
     params: {
       genres: gameQuery.genre?.id,
       parent_platforms: gameQuery.platform?.id,
