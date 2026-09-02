@@ -1,11 +1,12 @@
-import { useQuery } from "@tanstack/react-query";
+import { useInfiniteQuery } from "@tanstack/react-query";
 import gameService from "../services/game-service";
 import type { GameQuery } from "../entities/GameQuery";
 
 export default function useGames(gameQuery: GameQuery) {
-  const { data, error, isLoading } = useQuery({
+  return useInfiniteQuery({
     queryKey: ["games", gameQuery],
-    queryFn: ({ signal }) => gameService.getGames(gameQuery, signal),
+    queryFn: ({ pageParam, signal }) => gameService.getGames(gameQuery, pageParam as number, signal),
+    initialPageParam: 1,
+    getNextPageParam: (lastPage, allPages) => (lastPage.next ? allPages.length + 1 : undefined),
   });
-  return { games: data?.results ?? [], error: error ? (error as Error).message : null, isLoading };
 }
