@@ -2,6 +2,7 @@ import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import { ChakraProvider } from '@chakra-ui/react'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 import { system, ColorModeProvider } from './theme'
 import './index.css'
 import App from './App.tsx'
@@ -16,6 +17,7 @@ createRoot(document.getElementById('root')!).render(
           <App />
         </ColorModeProvider>
       </ChakraProvider>
+      <ReactQueryDevtools initialIsOpen={false} />
     </QueryClientProvider>
   </StrictMode>,
 )
