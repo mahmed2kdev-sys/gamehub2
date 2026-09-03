@@ -1,9 +1,6 @@
-import type { Genre } from "./Genre";
-import type { Platform } from "./Platform";
-
 export interface GameQuery {
-  genre: Genre | null;
-  platform: Platform | null;
+  genreId?: number;
+  platformId?: number;
   sortOrder: string;
   searchText: string;
 }

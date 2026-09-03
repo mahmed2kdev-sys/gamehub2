@@ -7,8 +7,8 @@ const client = new ApiClient<Game>("/games");
 const getGames = (gameQuery: GameQuery, page: number, signal?: AbortSignal) =>
   client.getAll({
     params: {
-      genres: gameQuery.genre?.id,
-      parent_platforms: gameQuery.platform?.id,
+      genres: gameQuery.genreId,
+      parent_platforms: gameQuery.platformId,
       ordering: gameQuery.sortOrder || undefined,
       search: gameQuery.searchText || undefined,
       page,
