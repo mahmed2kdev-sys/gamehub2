@@ -9,11 +9,15 @@ interface GameQueryStore {
   setSortOrder: (sortOrder: string) => void
 }
 
-// ponytail: 4 explicit setters, no persist/devtools until needed
+// ponytail: search resets other filters so queryKey is search-only; empty search -> {}
 export const useGameQueryStore = create<GameQueryStore>()((set) => ({
-  gameQuery: { sortOrder: "", searchText: "" },
+  gameQuery: {},
   setSearchText: (searchText) =>
-    set((s) => ({ gameQuery: { ...s.gameQuery, searchText } })),
+    set(
+      searchText?.trim()
+        ? { gameQuery: { searchText: searchText.trim() } }
+        : { gameQuery: {} }
+    ),
   setGenreId: (genreId) =>
     set((s) => ({ gameQuery: { ...s.gameQuery, genreId } })),
   setPlatformId: (platformId) =>
