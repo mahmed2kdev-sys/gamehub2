@@ -15,7 +15,7 @@ export default function SortSelector() {
 
   return (
     <NativeSelect.Root size="sm" maxW="200px">
-      <NativeSelect.Field borderWidth="0" bg={{ _light: "gray.100", _dark: "whiteAlpha.100" }} value={sortOrder} onChange={(e) => setSortOrder(e.target.value)}>
+      <NativeSelect.Field borderWidth="0" bg={{ _light: "gray.100", _dark: "whiteAlpha.100" }} value={sortOrder ?? ""} onChange={(e) => setSortOrder(e.target.value)}>
         {sortOrders.map((o) => (
           <option key={o.value} value={o.value}>
             {o.label}
