@@ -3,13 +3,11 @@ import { useRef } from 'react'
 import { BsSearch } from 'react-icons/bs'
 import logo from '../assets/logo.webp'
 import { ColorSwitchButton } from './ColorSwitchButton'
-
-interface Props {
-  onSearch: (searchText: string) => void
-}
+import { useGameQueryStore } from '../store/useGameQueryStore'
 
 // ponytail: submit-on-enter, add debounce if live search needed
-const NavBar = ({ onSearch }: Props) => {
+const NavBar = () => {
+  const setSearchText = useGameQueryStore((s) => s.setSearchText)
   const ref = useRef<HTMLInputElement>(null)
   return (
     <HStack w="100%" gap={4}>
@@ -19,7 +17,7 @@ const NavBar = ({ onSearch }: Props) => {
         style={{ flex: 1 }}
         onSubmit={(e) => {
           e.preventDefault()
-          if (ref.current) onSearch(ref.current.value)
+          if (ref.current) setSearchText(ref.current.value)
         }}
       >
         <InputGroup startElement={<BsSearch />}>

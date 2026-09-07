@@ -1,15 +1,13 @@
 import { Heading } from "@chakra-ui/react";
-import type { GameQuery } from "../entities/GameQuery";
 import useGenre from "../hooks/useGenre";
 import usePlatform from "../hooks/usePlatform";
+import { useGameQueryStore } from "../store/useGameQueryStore";
 
-interface Props {
-  gameQuery: GameQuery;
-}
-
-export default function GameHeading({ gameQuery }: Props) {
-  const genre = useGenre(gameQuery.genreId);
-  const platform = usePlatform(gameQuery.platformId);
+export default function GameHeading() {
+  const genreId = useGameQueryStore((s) => s.gameQuery.genreId);
+  const platformId = useGameQueryStore((s) => s.gameQuery.platformId);
+  const genre = useGenre(genreId);
+  const platform = usePlatform(platformId);
   const heading = `${platform?.name ?? ""} ${genre?.name ?? ""} Games`.replace(/\s+/g, " ").trim();
   // ponytail: simple join+trim, add "for"/searchText prefix when needed
   return (

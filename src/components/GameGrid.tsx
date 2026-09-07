@@ -5,13 +5,10 @@ import useGames from "../hooks/useGames";
 import GameCard from "./GameCard";
 import GameCardSkeleton from "./GameCardSkeleton";
 import GameCardContainer from "./GameCardContainer";
-import type { GameQuery } from "../entities/GameQuery";
+import { useGameQueryStore } from "../store/useGameQueryStore";
 
-interface Props {
-  gameQuery: GameQuery;
-}
-
-export default function GameGrid({ gameQuery }: Props) {
+export default function GameGrid() {
+  const gameQuery = useGameQueryStore((s) => s.gameQuery);
   const { data, error, isLoading, fetchNextPage, hasNextPage } = useGames(gameQuery);
 
   const games = data?.pages.flatMap((p) => p.results) ?? [];
