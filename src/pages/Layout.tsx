@@ -10,6 +10,8 @@ export default function Layout() {
         lg: `"nav nav" "aside main"`,
       }}
       gridTemplateColumns={{ base: "1fr", lg: "300px 1fr" }}
+      bg={{ _light: "gray.50", _dark: "gray.800" }}
+      minH="100svh"
     >
       <GridItem gridArea="nav" bg={{ _light: "gray.50", _dark: "gray.800" }} p="4">
         <NavBar />
