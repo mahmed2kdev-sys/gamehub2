@@ -1,4 +1,5 @@
 import { Card, Image, Text, HStack } from "@chakra-ui/react";
+import { Link as RouterLink } from "react-router";
 import type { Game } from "../entities/Game";
 import PlatformIconList from "./PlatformIconList";
 import CriticScore from "./CriticScore";
@@ -12,6 +13,7 @@ interface Props {
 export default function GameCard({ game }: Props) {
   return (
     <Card.Root>
+      <RouterLink to={`/games/${game.slug ?? game.id}`} style={{ textDecoration: "none" }}>
       <Image src={getCroppedImageUrl(game.background_image)} alt={game.name} loading="lazy" />
       <Card.Body>
         <HStack justify="space-between" mb={3}>
@@ -25,6 +27,7 @@ export default function GameCard({ game }: Props) {
           <Emoji rating={game.rating_top} />
         </HStack>
       </Card.Body>
+      </RouterLink>
     </Card.Root>
   );
 }

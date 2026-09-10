@@ -1,4 +1,5 @@
 import { HStack, Image, Text, Input, InputGroup } from '@chakra-ui/react'
+import { Link as RouterLink } from 'react-router'
 import { useRef } from 'react'
 import { BsSearch } from 'react-icons/bs'
 import logo from '../assets/logo.webp'
@@ -11,7 +12,7 @@ const NavBar = () => {
   const ref = useRef<HTMLInputElement>(null)
   return (
     <HStack w="100%" gap={4}>
-      <Image src={logo} alt="logo" boxSize="60px" />
+      <RouterLink to="/"><Image src={logo} alt="logo" boxSize="60px" /></RouterLink>
       <Text whiteSpace="nowrap">My App</Text>
       <form
         style={{ flex: 1 }}
