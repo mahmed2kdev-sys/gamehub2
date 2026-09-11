@@ -1,5 +1,5 @@
 import { HStack, Image, Text, Input, InputGroup } from '@chakra-ui/react'
-import { Link as RouterLink } from 'react-router'
+import { Link as RouterLink, useNavigate } from 'react-router'
 import { useRef } from 'react'
 import { BsSearch } from 'react-icons/bs'
 import logo from '../assets/logo.webp'
@@ -9,6 +9,7 @@ import { useGameQueryStore } from '../store/useGameQueryStore'
 // ponytail: submit-on-enter, add debounce if live search needed
 const NavBar = () => {
   const setSearchText = useGameQueryStore((s) => s.setSearchText)
+  const navigate = useNavigate()
   const ref = useRef<HTMLInputElement>(null)
   return (
     <HStack w="100%" gap={4}>
@@ -18,7 +19,10 @@ const NavBar = () => {
         style={{ flex: 1 }}
         onSubmit={(e) => {
           e.preventDefault()
-          if (ref.current) setSearchText(ref.current.value)
+          if (ref.current) {
+            setSearchText(ref.current.value)
+            navigate('/')
+          }
         }}
       >
         <InputGroup startElement={<BsSearch />}>
