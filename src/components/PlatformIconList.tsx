@@ -9,7 +9,7 @@ import {
   FaGlobe,
   FaGamepad,
 } from "react-icons/fa";
-import type { Game } from "../entities/Game";
+import type Game from "../entities/Game";
 
 const iconMap: Record<string, typeof FaWindows> = {
   pc: FaWindows,

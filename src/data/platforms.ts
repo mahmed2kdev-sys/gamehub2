@@ -1,5 +1,5 @@
 // ponytail: static snapshot from RAWG 2026-08-30, re-fetch via /tmp/platforms.json if RAWG adds parents
-import type { Platform } from "../entities/Platform";
+import type Platform from "../entities/Platform";
 
 export const platforms: Platform[] = [
   { id: 1, name: 'PC', slug: 'pc' },

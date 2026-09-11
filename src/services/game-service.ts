@@ -1,6 +1,6 @@
 import { ApiClient } from "./api-client";
-import type { Game } from "../entities/Game";
-import type { GameQuery } from "../entities/GameQuery";
+import type Game from "../entities/Game";
+import type GameQuery from "../entities/GameQuery";
 
 const client = new ApiClient<Game>("/games");
 

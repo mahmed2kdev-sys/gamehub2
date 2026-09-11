@@ -1,5 +1,5 @@
 // ponytail: static snapshot from RAWG 2026-08-30, re-fetch via /tmp/genres.json if RAWG adds genres
-import type { Genre } from "../entities/Genre";
+import type Genre from "../entities/Genre";
 
 export const genres: Genre[] = [
   { id: 4, name: 'Action', image_background: 'https://media.rawg.io/media/games/960/960b601d9541cec776c5fa42a00bf6c4.jpg' },
