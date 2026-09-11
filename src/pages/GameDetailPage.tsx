@@ -1,8 +1,21 @@
 import { Link as RouterLink, useParams } from "react-router";
-import { useState } from "react";
-import { Button, GridItem, Heading, Image, Link, Spinner, Text } from "@chakra-ui/react";
+import { useState, type ReactNode } from "react";
+import { Box, Button, GridItem, Heading, Image, Link, SimpleGrid, Spinner, Text } from "@chakra-ui/react";
 import useGame from "../hooks/useGame";
 import getCroppedImageUrl from "../services/image-url";
+import CriticScore from "../components/CriticScore";
+
+// ponytail: inline DefinitionItem, extract to components/GameAttributes.tsx if reused
+function DefinitionItem({ term, children }: { term: string; children: ReactNode }) {
+  return (
+    <Box as="div">
+      <Heading as="dt" fontSize="md" color="gray.500" mb={1}>
+        {term}
+      </Heading>
+      <Box as="dd">{children}</Box>
+    </Box>
+  );
+}
 
 export default function GameDetailPage() {
   const { slug } = useParams();
@@ -29,6 +42,15 @@ export default function GameDetailPage() {
       </Link>
       <Heading mb={4}>{game.name}</Heading>
       <Image src={getCroppedImageUrl(game.background_image)} alt={game.name} mb={4} />
+      <SimpleGrid columns={{ base: 1, md: 2 }} gap={4} my={4} as="dl">
+        <DefinitionItem term="Platforms">{game.parent_platforms?.map(({ platform }) => platform.name).join(", ") || "—"}</DefinitionItem>
+        <DefinitionItem term="Metascore">
+          <CriticScore score={game.metacritic} />
+          {game.metacritic == null && <Text>—</Text>}
+        </DefinitionItem>
+        <DefinitionItem term="Genres">{game.genres?.map((g) => g.name).join(", ") || "—"}</DefinitionItem>
+        <DefinitionItem term="Publishers">{game.publishers?.map((p) => p.name).join(", ") || "—"}</DefinitionItem>
+      </SimpleGrid>
       {game.description_raw && (
         <>
           <Text whiteSpace="pre-line" lineClamp={expanded ? undefined : 3}>

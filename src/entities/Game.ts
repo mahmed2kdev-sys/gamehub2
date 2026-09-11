@@ -7,6 +7,8 @@ export interface Game {
   parent_platforms: { platform: { id: number; name: string; slug: string } }[];
   metacritic: number | null;
   rating_top: number;
+  genres: { id: number; name: string }[];
+  publishers: { id: number; name: string }[];
 }
 
 export interface FetchResponse<T> {
